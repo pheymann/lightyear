@@ -1,4 +1,4 @@
-module Test
+module ParserTest
 
 import Data.Vect
 import Data.Fin

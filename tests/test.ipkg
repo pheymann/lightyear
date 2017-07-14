@@ -6,7 +6,7 @@ pkgs = specdris -- github.com/pheymann/specdris
 
 modules = Json
         , JsonTest
-        , Test
+        , ParserTest
         , TestUtil
         , SpecSuite
 
