@@ -1,5 +1,11 @@
-os: osx
-install:
-  - brew install idris
+language: generic
+
+os: linux
+
+sudo: required
+
+services:
+  - docker
+
 script:
-  - make test 
+  - docker run -v $(pwd):/var/idris-project pheymann/idris-travis:1.0 make test
