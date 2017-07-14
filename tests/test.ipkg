@@ -2,9 +2,12 @@ package test
 
 opts = "--sourcepath ../ --idrispath ../ -p contrib"
 
+pkgs = specdris -- github.com/pheymann/specdris
+
 modules = Json
         , JsonTest
         , Test
+        , TestUtil
+        , SpecSuite
 
-tests = JsonTest.jsonTests
-      , Test.tests
+tests = SpecSuite.specSuite
