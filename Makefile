@@ -7,7 +7,7 @@ build: Lightyear/*.idr
 	idris --build lightyear.ipkg
 
 test: build
-	(cd tests; bash runtests.sh)
+	(cd tests; idris --clean test.ipkg; idris --testpkg test.ipkg)
 
 clean:
 	idris --clean lightyear.ipkg
