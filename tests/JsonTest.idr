@@ -9,30 +9,29 @@ export
 specs : SpecTree
 specs = describe "Json parser (data from examples)" $ do
          it "JSON 1" $ do
-           shouldParseShow 
+           shouldParseEqShow 
              jsonToplevelValue
              "[1,2,4,[5,6],null,{\"some\":[\"object\"]},false]"
              "[1, 2, 4, [5, 6], null, {\"some\": [\"object\"]}, false]"
          it "JSON 2" $ do
-           shouldParseShow
+           shouldParseEqShow
              jsonToplevelValue
              "{\n  \"hallo\":42,\"nichts\":null}"
              "{\"hallo\": 42, \"nichts\": null}"
          it "JSON 3" $ do
-           shouldParseShow
+           shouldParseEqShow
              jsonToplevelValue
              "{\"hello\": [{\"world\": false}, 3, \"string\", true, null]}"
              "{\"hello\": [{\"world\": false}, 3, \"string\", true, null]}"
          it "JSON 4" $ do
-           shouldNotParse
+           shouldNotParseEq
              jsonToplevelValue
              "{{\n  \"hallo\":42,\"nichts\":null}"
-             """at 1:1 expected:
-  character '['
-at 1:1 expected:
-  a different token
-at 1:2 expected:
-  character '}'
-at 1:2 expected:
-  a different token
-"""
+             """At 1:1:
+	character '['
+At 1:1:
+	a different token
+At 1:2:
+	character '}'
+At 1:2:
+	a different token"""

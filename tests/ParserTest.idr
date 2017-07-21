@@ -20,19 +20,14 @@ export
 specs : SpecTree
 specs = describe "Parser" $ do
          it "parse scalar values" $ do
-           shouldParse integer "123" 123
+           shouldParseEq integer "123" 123
          it "parse recursive structures" $ do
-           shouldParse (listOf integer) "[1,2,3,98]" [1, 2, 3, 98]
-           shouldParse (listOf' integer) "[1,2,3,99]" [1, 2, 3, 99]
+           shouldParseEq (listOf integer) "[1,2,3,98]" [1, 2, 3, 98]
+           shouldParseEq (listOf' integer) "[1,2,3,99]" [1, 2, 3, 99]
          it "parse nested structures" $ do
-           shouldParse (listOf $ listOf integer) "[[1,2],[],[3,4,5]]" [[1, 2], [], [3, 4, 5]]
-           shouldParse (listOf' $ listOf integer) "[[1,2],[],[3,4,5,6]]" [[1, 2], [], [3, 4, 5, 6]]
+           shouldParseEq (listOf $ listOf integer) "[[1,2],[],[3,4,5]]" [[1, 2], [], [3, 4, 5]]
+           shouldParseEq (listOf' $ listOf integer) "[[1,2],[],[3,4,5,6]]" [[1, 2], [], [3, 4, 5, 6]]
          it "should commit and fail" $ do
-           shouldParse (listOf' integer <|> (string "[foo" *> pure List.Nil)) "[foo" []
-           shouldNotParse (listOf integer <|> (string "[foo" *> pure List.Nil)) "[foo" """at 1:2 expected:
-  string "]"
-at 1:2 expected:
-  character ']'
-at 1:2 expected:
-  a different token
-"""
+           shouldNotParseEq (listOf integer) "foo" "At 1:1:\n\tstring \"[\"\nAt 1:1:\n\tcharacter '['\nAt 1:1:\n\ta different token"         
+           shouldParseEq (listOf' integer <|> (string "[foo" *> pure List.Nil)) "[foo" []
+           shouldNotParseEq (listOf integer <|> (string "[foo" *> pure List.Nil)) "[foo" "At 1:2:\n\tstring \"]\"\nAt 1:2:\n\tcharacter ']'\nAt 1:2:\n\ta different token"
