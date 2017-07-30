@@ -1,11 +1,2 @@
-language: generic
-
-os: linux
-
-sudo: required
-
-services:
-  - docker
-
-script:
-  - docker run -v $(pwd):/var/idris-project pheymann/idris-travis:1.0 make testCI
+language: nix
+script: nix-shell -A lightyear --command "make testCI"
