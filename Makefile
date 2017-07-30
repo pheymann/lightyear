@@ -5,7 +5,7 @@ install: build
 
 dependencies:
 	mkdir dependencies
-	(cd dependencies; git clone https://github.com/pheymann/specdris; git fetch; cd specdris; git checkout v0.2.1; ./project --build; cd ../..)
+	(cd dependencies; git clone https://github.com/pheymann/specdris; git fetch; cd specdris; git checkout v0.2.2; ./project --build; cd ../..)
 
 build: Lightyear/*.idr
 	idris --build lightyear.ipkg
