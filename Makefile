@@ -14,7 +14,7 @@ test: build
 	(cd tests; idris --clean test.ipkg; idris --testpkg test.ipkg --idrispath ../dependencies/specdris/src)
 
 testCI: dependencies
-	(cd tests; idris --clean test.ipkg; idris --testpkg test.ipkg --idrispath ../dependencies/specdris/src)
+	(cd tests; idris --clean test.ipkg; idris --testpkg test.ipkg --idrispath ../../dependencies/specdris/src)
 
 clean:
 	idris --clean lightyear.ipkg
